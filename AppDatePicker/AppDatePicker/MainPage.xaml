@@ -41,11 +41,15 @@
         </StackLayout>
 
         <DatePicker
+            x:Name="datePicker"
             Margin="0,20,0,0"
             Date="{Binding SelectedDate}"
             Format="{Binding DateFormat}"
             HorizontalOptions="Start" />
-        <TimePicker Format="{Binding TimeFormat}" Time="{Binding SelectedTime}" />
+        <TimePicker
+            x:Name="timePicker"
+            Format="{Binding TimeFormat}"
+            Time="{Binding SelectedTime}" />
 
         <Button
             Command="{Binding LoopCultureFormatCommand}"

@@ -26,7 +26,7 @@ namespace AppDatePicker
 
         [ObservableProperty]
         public string? timeFormat; 
-        private string[] timeFormats = { "hh:mm tt", "HH:mm" };
+        private string[] timeFormats = { "t", "hh:mm tt", "HH:mm" };
         private int idxTimeFormat = 0;
 
         [ObservableProperty]
@@ -38,6 +38,8 @@ namespace AppDatePicker
         {
             SelectedDate = DateTime.Today;
             SelectedTime = DateTime.Now.TimeOfDay;
+
+
 
             // culture = CultureInfo.CurrentCulture; // detects from OS. 
             // culture = CultureInfo.InvariantCulture; 
