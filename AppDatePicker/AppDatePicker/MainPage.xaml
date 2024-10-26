@@ -7,11 +7,23 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:DataType="local:MainViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout
         Padding="30,0"
         Orientation="Vertical"
         Spacing="5">
         <Label FontSize="Title" Text="Hello, .NET MAUI!" />
+
+        <StackLayout Orientation="Horizontal">
+            <Label FontSize="Body" Text="A floating point number:" />
+            <!--<Label Text="{Binding Number, Converter={StaticResource DoubleToStringConverter}}" />-->
+            <Label Text="{Binding TxtNumber}" />
+        </StackLayout>
 
         <StackLayout Orientation="Horizontal">
             <Label FontSize="Body" Text="Country name from CultureInfo:" />

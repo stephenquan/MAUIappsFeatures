@@ -14,7 +14,8 @@ namespace AppDatePicker
 
         [ObservableProperty]
         public string? countryName;
-        public CultureInfo culture;
+        [ObservableProperty]
+        public CultureInfo culture; 
         string[] cultureFormats = { "en-US", "de-DE", "fr-FR", "da-DK", "" };
         private int idxCulture = 0;
 
@@ -28,6 +29,11 @@ namespace AppDatePicker
         private string[] timeFormats = { "hh:mm tt", "HH:mm" };
         private int idxTimeFormat = 0;
 
+        [ObservableProperty]
+        private double number;
+        [ObservableProperty]
+        private string? txtNumber = string.Empty; 
+
         public MainViewModel()
         {
             SelectedDate = DateTime.Today;
@@ -35,18 +41,28 @@ namespace AppDatePicker
 
             // culture = CultureInfo.CurrentCulture; // detects from OS. 
             // culture = CultureInfo.InvariantCulture; 
-            culture = new CultureInfo(cultureFormats[0] ?? "");
-            CountryName = culture.Name;
+            Culture = new CultureInfo(cultureFormats[0] ?? "");
+            CultureInfo.CurrentCulture = Culture;
+            CountryName = Culture.Name;
             DateFormat = dateFormats[0] ?? "d";
-            TimeFormat = timeFormats[0] ?? "hh:mm tt"; 
+            TimeFormat = timeFormats[0] ?? "hh:mm tt";
+            Number = 3.1425;
+            // TxtNumber = String.Format("{0:N3}", Number); // Conversion in XAML doesn't re
+        }
+
+        partial void OnNumberChanged(double value)
+        {
+            TxtNumber = String.Format("{0:N3}", value);
         }
 
         [RelayCommand]
         public void ToogleCultureFormat()
         {
             idxCulture = ++idxCulture % cultureFormats.Length;
-            culture = new CultureInfo(cultureFormats[idxCulture]);
-            CountryName = culture.Name; 
+            Culture = new CultureInfo(cultureFormats[idxCulture]);
+            CultureInfo.CurrentCulture = Culture;
+            CountryName = Culture.Name;
+            Number = Number * 1.0001; 
         }
 
         [RelayCommand]

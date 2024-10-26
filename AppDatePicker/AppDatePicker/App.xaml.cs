@@ -1,4 +1,6 @@
-﻿namespace AppDatePicker
+﻿using System.Globalization;
+
+namespace AppDatePicker
 {
     public partial class App : Application
     {
@@ -7,6 +9,7 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+
         }
     }
 }
