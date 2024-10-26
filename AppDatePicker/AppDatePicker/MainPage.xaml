@@ -48,15 +48,15 @@
         <TimePicker Format="{Binding TimeFormat}" Time="{Binding SelectedTime}" />
 
         <Button
-            Command="{Binding ToogleCultureFormatCommand}"
+            Command="{Binding LoopCultureFormatCommand}"
             HorizontalOptions="Fill"
             Text="Change Culture" />
         <Button
-            Command="{Binding ToogleDateFormatCommand}"
+            Command="{Binding LoopDateFormatCommand}"
             HorizontalOptions="Fill"
             Text="Change Date format" />
         <Button
-            Command="{Binding ToogleTimeFormatCommand}"
+            Command="{Binding LoopTimeFormatCommand}"
             HorizontalOptions="Fill"
             Text="Change Time format" />
 

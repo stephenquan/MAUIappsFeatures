@@ -21,7 +21,7 @@ namespace AppDatePicker
 
         [ObservableProperty]
         public string? dateFormat;
-        private string[] dateFormats = { "d", "MM/dd/yyyy", "dd/MM/yyyy" };
+        private string[] dateFormats = { "d", "MM/dd/yyyy", "dd/MM/yyyy", "ddd dd/MM/yyyy" };
         private int idxDateFormat = 0;
 
         [ObservableProperty]
@@ -43,11 +43,12 @@ namespace AppDatePicker
             // culture = CultureInfo.InvariantCulture; 
             Culture = new CultureInfo(cultureFormats[0] ?? "");
             CultureInfo.CurrentCulture = Culture;
+            CultureInfo.CurrentUICulture = Culture;
             CountryName = Culture.Name;
             DateFormat = dateFormats[0] ?? "d";
             TimeFormat = timeFormats[0] ?? "hh:mm tt";
             Number = 3.1425;
-            // TxtNumber = String.Format("{0:N3}", Number); // Conversion in XAML doesn't re
+            // TxtNumber = String.Format("{0:N3}", Number); // 
         }
 
         partial void OnNumberChanged(double value)
@@ -56,17 +57,21 @@ namespace AppDatePicker
         }
 
         [RelayCommand]
-        public void ToogleCultureFormat()
+        public void LoopCultureFormat()
         {
             idxCulture = ++idxCulture % cultureFormats.Length;
             Culture = new CultureInfo(cultureFormats[idxCulture]);
             CultureInfo.CurrentCulture = Culture;
+            CultureInfo.CurrentUICulture = Culture;
             CountryName = Culture.Name;
-            Number = Number * 1.0001; 
+            Number = Number * 1.0001;
+
+            DateFormat = Culture.DateTimeFormat.LongDatePattern;
+            TimeFormat = Culture.DateTimeFormat.LongTimePattern;
         }
 
         [RelayCommand]
-        public void ToogleDateFormat()
+        public void LoopDateFormat()
         {
             idxDateFormat = ++idxDateFormat % dateFormats.Length;
             var dateBefore = SelectedDate.Date;
@@ -76,7 +81,7 @@ namespace AppDatePicker
         }
 
         [RelayCommand]
-        public void ToogleTimeFormat()
+        public void LoopTimeFormat()
         {
             idxTimeFormat = ++idxTimeFormat % timeFormats.Length;
             var timeBefore = SelectedTime.Minutes;
