@@ -22,47 +22,39 @@
         <StackLayout Orientation="Horizontal">
             <Label FontSize="Body" Text="A floating point number:" />
             <!--<Label Text="{Binding Number, Converter={StaticResource DoubleToStringConverter}}" />-->
-            <Label Text="{Binding TxtNumber}" />
+            <Label Text="{MultiBinding {Binding Number}, {Binding Culture}, StringFormat='{}{0:N3}'}" />
         </StackLayout>
 
         <StackLayout Orientation="Horizontal">
             <Label FontSize="Body" Text="Country name from CultureInfo:" />
-            <Label Text="{Binding CountryName}" />
+            <Label Text="{Binding Culture.Name}" />
         </StackLayout>
 
         <StackLayout Orientation="Horizontal">
             <Label Text="Format property (DatePicker): " />
-            <Label Text="{Binding DateFormat}" />
+            <Label Text="{Binding Culture.DateTimeFormat.LongDatePattern}" />
         </StackLayout>
 
         <StackLayout Orientation="Horizontal">
             <Label FontSize="Body" Text="Format property (TimePicker):" />
-            <Label Text="{Binding TimeFormat}" />
+            <Label Text="{Binding Culture.DateTimeFormat.LongTimePattern}" />
         </StackLayout>
 
         <DatePicker
             x:Name="datePicker"
             Margin="0,20,0,0"
             Date="{Binding SelectedDate}"
-            Format="{Binding DateFormat}"
+            Format="{Binding Culture.DateTimeFormat.LongDatePattern}"
             HorizontalOptions="Start" />
         <TimePicker
             x:Name="timePicker"
-            Format="{Binding TimeFormat}"
+            Format="{Binding Culture.DateTimeFormat.LongTimePattern}"
             Time="{Binding SelectedTime}" />
 
         <Button
             Command="{Binding LoopCultureFormatCommand}"
             HorizontalOptions="Fill"
             Text="Change Culture" />
-        <Button
-            Command="{Binding LoopDateFormatCommand}"
-            HorizontalOptions="Fill"
-            Text="Change Date format" />
-        <Button
-            Command="{Binding LoopTimeFormatCommand}"
-            HorizontalOptions="Fill"
-            Text="Change Time format" />
 
     </StackLayout>
 
