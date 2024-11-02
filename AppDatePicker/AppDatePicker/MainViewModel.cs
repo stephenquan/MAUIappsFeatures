@@ -8,9 +8,14 @@ namespace AppDatePicker
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(SelectedTime))]
         private DateTime selectedDate;
-        [ObservableProperty]
-        private TimeSpan selectedTime; 
+
+        public TimeSpan SelectedTime
+        {
+            get => SelectedDate.TimeOfDay;
+            set => SelectedDate = SelectedDate - SelectedDate.TimeOfDay + value;
+        }
 
         public CultureInfo Culture
         {
@@ -30,8 +35,7 @@ namespace AppDatePicker
 
         public MainViewModel()
         {
-            SelectedDate = DateTime.Today;
-            SelectedTime = DateTime.Now.TimeOfDay;
+            SelectedDate = DateTime.Now;
             Culture = new CultureInfo(cultureFormats[0] ?? "");
             Number = 3.1425;
         }

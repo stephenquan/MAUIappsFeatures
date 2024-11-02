@@ -40,6 +40,9 @@
             <Label Text="{Binding Culture.DateTimeFormat.LongTimePattern}" />
         </StackLayout>
 
+        <Label Text="{MultiBinding {Binding SelectedDate}, {Binding Culture}, StringFormat='Selected Date: {0:D}'}" />
+        <Label Text="{MultiBinding {Binding SelectedDate}, {Binding Culture}, StringFormat='Selected Time: {0:T}'}" />
+
         <DatePicker
             x:Name="datePicker"
             Margin="0,20,0,0"
